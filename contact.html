@@ -62,8 +62,21 @@
       </div>
     </div>
     <div class="footer-note">أستاذ الخدمة الاجتماعية الإكلينيكية — جامعة بني سويف</div>
+    <div class="visitor-counter">عدد زيارات الموقع: <strong id="visitorCount">…</strong></div>
   </div>
 </footer>
 
+<script>
+  fetch('https://api.countapi.xyz/hit/rafat-abdelrahman-portfolio/site-visits')
+    .then(r => r.json())
+    .then(data => {
+      const el = document.getElementById('visitorCount');
+      if (el) el.textContent = data.value.toLocaleString('ar-EG');
+    })
+    .catch(() => {
+      const el = document.getElementById('visitorCount');
+      if (el) el.textContent = '—';
+    });
+</script>
 </body>
 </html>

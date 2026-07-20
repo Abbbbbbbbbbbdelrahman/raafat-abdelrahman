@@ -607,6 +607,20 @@ footer{
   .lightbox-next{ left: 8px; width: 38px; height: 38px; }
 }
 
+.visitor-counter{
+  font-family: var(--sans);
+  font-size: .78rem;
+  color: var(--ink-soft);
+  letter-spacing: .3px;
+}
+.visitor-counter strong{
+  font-family: var(--serif);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: .9rem;
+  margin-left: 4px;
+}
+
 @media print{
   header, footer{ display:none; }
 }
