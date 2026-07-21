@@ -126,16 +126,22 @@
 </footer>
 
 <script>
-  fetch('https://countapi.mileshilliard.com/api/v1/hit/rafat-abdelrahman-portfolio-visits')
-    .then(r => r.json())
-    .then(data => {
-      const el = document.getElementById('visitorCount');
-      if (el) el.textContent = data.value.toLocaleString('ar-EG');
-    })
-    .catch(() => {
-      const el = document.getElementById('visitorCount');
-      if (el) el.textContent = '—';
-    });
+  (function(){
+    const KEY = 'rafat-abdelrahman-portfolio-visits';
+    const BASE = 'https://countapi.mileshilliard.com/api/v1';
+    const el = document.getElementById('visitorCount');
+    const alreadyVisited = localStorage.getItem('site_visited_before');
+    const endpoint = alreadyVisited ? (BASE + '/get/' + KEY) : (BASE + '/hit/' + KEY);
+    fetch(endpoint)
+      .then(r => r.json())
+      .then(data => {
+        if (el) el.textContent = Number(data.value).toLocaleString('ar-EG');
+        if (!alreadyVisited) localStorage.setItem('site_visited_before', '1');
+      })
+      .catch(() => {
+        if (el) el.textContent = '—';
+      });
+  })();
 </script>
 </body>
 </html>
